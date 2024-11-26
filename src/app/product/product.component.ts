@@ -14,7 +14,7 @@ import { Product } from './product.types';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-  protected product?: Product;
+  @Input() product?: Product;
 }
 
 
