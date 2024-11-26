@@ -1,8 +1,56 @@
-.welcome-text {
-    color: #ea5530; 
-    font-weight: bold; 
-    text-align: center; 
-    margin-top: 70px; 
-    font-size: 1.5rem; 
+
+  .hero-section {
+    background-image: url('https://images5.alphacoders.com/632/632668.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Hauteur de la section (pleine hauteur d'écran) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .description {
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    margin-top: 14rem;
+  }
+  
+  .description h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  .description p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .cta-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .welcome-text {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
   }
   
