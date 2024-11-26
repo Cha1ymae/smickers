@@ -1,11 +1,36 @@
-<mat-toolbar color="primary" class="header">
-    <span class="title">Smickers</span>
-    <span class="spacer"></span>
+<mat-toolbar class="header">
+  <div class="logo">
+    <img src="https://previews.123rf.com/images/goodlogo/goodlogo2211/goodlogo221100182/194413772-illustration-de-baskets-isolée-silhouette-linéaire-de-chaussure-de-basket-ball-logo-de-la.jpg" alt="Logo Smickers" />
+    <span class="brand">Smickers</span>
+  </div>
+
+  <div class="navigation">
+    <nav class="nav-links">
+      <a mat-button routerLink="/sneakers">Sneakers</a>
+      <a mat-button routerLink="/chaussures">Chaussures</a>
+      <a mat-button routerLink="/streetwear">Streetwear</a>
+    </nav>
+
+    <mat-form-field class="search-field" appearance="outline">
+      <input matInput placeholder="Rechercher une marque, un modèle..." />
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>favorite</mat-icon>
+    </button>
     <button mat-icon-button>
       <mat-icon>shopping_cart</mat-icon>
     </button>
     <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
+      <mat-icon>menu</mat-icon>
     </button>
-  </mat-toolbar>
-  
+  </div>
+</mat-toolbar>
