@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     padding: 0 2rem;
-    height: 80px;
+    height: 70px;
     border-bottom: 2px solid #f0f0f0;
     gap: 2rem;
   }
@@ -46,17 +46,18 @@
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
+    margin-top: 0.3rem;
   }
   
   .nav-links a:hover {
-    color: #1a237e;
+    color: #1a1a1b;
   }
   
   .search-field {
-    max-width: 535px;
+    max-width: 615px;
     flex-grow: 1; 
     margin-left: 1rem; 
-    margin-top: 1rem;
+    margin-top: 1.3rem;
   }
   
   .mat-form-field {
@@ -64,6 +65,7 @@
     border-radius: 20px;
     padding: 0 10px;
     width: 100%;
+    border: 1px solid #ccc;
   }
   
   .mat-input-element {
@@ -72,7 +74,7 @@
   }
   
   .mat-form-field.mat-focused .mat-label {
-    color: #1a237e;
+    color: #1a1a1b;
   }
   
   .actions {
@@ -87,7 +89,7 @@
   }
   
   button:hover mat-icon {
-    color: #1a237e;
+    color: #1a1a1b;
   }
   
   button {
@@ -95,6 +97,6 @@
   }
   
   button:hover {
-    color: #1a237e;
+    color: #1a1a1b;
   }
   
