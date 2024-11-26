@@ -1,9 +1,15 @@
 <app-header></app-header>
 
 <main class="main">
-  <div class="content">
-    <p class="welcome-text">Bienvenue sur Smickers, votre site de vente en ligne révolutionnaire !</p>
+  <div class="hero-section">
+    <div class="description">
+      <h1>Bienvenue sur Smickers</h1>
+      <p>Découvrez nos collections exclusives et les meilleures offres pour vos sneakers préférés !</p>
+      <button class="cta-button">Explorer Maintenant</button>
+    </div>
   </div>
+  <app-product [product]="product"></app-product>
+
 </main>
 
 <app-footer></app-footer>
