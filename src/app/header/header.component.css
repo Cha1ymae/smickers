@@ -1,0 +1,15 @@
+.header {
+    background-color: #ea5530; /* Couleur de la barre d'outils */
+    color: white;
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
