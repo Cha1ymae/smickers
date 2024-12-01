@@ -4,7 +4,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh; /* Hauteur de la section (pleine hauteur d'écran) */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,4 +54,22 @@
     margin-top: 2rem;
   }
   
-  
+.product-grid {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; 
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr; 
+  }
+}
