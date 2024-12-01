@@ -15,6 +15,7 @@ import { Product } from './product.types';
         <h2>{{ product?.price }} €</h2>
         <p>{{ product?.description }}</p>
       </div>
+      <button class="add-to-cart">Ajouter au panier</button>
     </div>
   `,
   styleUrls: ['./product.component.css']
