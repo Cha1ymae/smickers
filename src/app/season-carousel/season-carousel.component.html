@@ -1,0 +1,13 @@
+<div class="carousel-container">
+  <h1>Catégorie :</h1>
+  <h2 class="season-indicator">{{ currentSeason}}</h2>
+  <div class="carousel-images">
+    <div *ngFor="let image of seasons[currentSeason]" class="carousel-item">
+      <img [src]="image" alt="Image de la saison" class="carousel-image">
+    </div>
+  </div>
+
+  <div class="show-more">
+    <button (click)="changeSeason()">Afficher plus →</button>
+  </div>
+</div>
