@@ -45,7 +45,7 @@ export class AppComponent {
       id: '3',
       title: 'Puma RS-X',
       description: 'La combinaison parfaite entre confort et design.',
-      photo: 'https://www.cdiscount.com/pdt2/2/2/7/1/700x700/mp61639227/rw/baskets-mode-puma-rs-x-eos-jr.jpg',
+      photo: '',
       price: 100,
       stock: 8,
       category: 'printemps'
@@ -110,7 +110,7 @@ export class AppComponent {
       description: 'Un look classique pour tous les jours.',
       photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVLsSJgVW6AWd3yheIS5KhJM7PEwbpNKITLg&s',
       price: 85,
-      stock: 20,
+      stock: 0,
       category: 'hiver'
     }
   ];
