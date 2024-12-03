@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { UpperCasePipe, NgIf, NgStyle } from '@angular/common';
 import { Product } from './product.types';
 
 @Component({
   selector: 'app-product',
-  imports: [NgStyle,NgIf],
+  imports: [NgStyle,NgIf,UpperCasePipe],
   template: `
     <div class="product">
       <img 
@@ -13,7 +13,7 @@ import { Product } from './product.types';
         alt="{{ product?.title }}" 
       />
       <div class="product-info">
-        <h1>{{ product?.title }}</h1>
+        <h1>{{ product?.title | uppercase }} </h1>
         <h2>{{ product?.price }}€</h2>
         <p>{{ product?.description }}</p>
       </div>
