@@ -14,7 +14,7 @@ import { Product } from './product.types';
       />
       <div class="product-info">
         <h1>{{ product?.title }}</h1>
-        <h2>{{ product?.price }} €</h2>
+        <h2>{{ product?.price }}€</h2>
         <p>{{ product?.description }}</p>
       </div>
       <button class="add-to-cart" 
