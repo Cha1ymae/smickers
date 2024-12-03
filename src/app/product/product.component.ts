@@ -47,9 +47,4 @@ export class ProductComponent {
       ? this.product.photo 
       : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Y2SLfdkXPJMxZ2QtRIK1fy2Lvnr6UVgmzQ&s';
   }
-   messageAffich = () =>
-  {
-
-    return ;
-  }
 }
