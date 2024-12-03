@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Product } from './product.types';
 
 @Component({
   selector: 'app-product',
-  imports: [NgClass],
+  imports: [NgStyle,NgIf],
   template: `
     <div class="product">
       <img 
@@ -17,11 +17,16 @@ import { Product } from './product.types';
         <h2>{{ product?.price }}€</h2>
         <p>{{ product?.description }}</p>
       </div>
-      <button class="add-to-cart" 
-              [disabled]="product && +product.stock === 0"   
-              (click)="onAddToCart()"
-              [ngClass]="{ 'added': addedToCart }"> {{ addedToCart ? 'Article ajouté' : 'Ajouter au panier' }}
-      </button>
+      <button 
+      class="add-to-cart"
+      *ngIf="product?.stock != 0" 
+      [disabled]="product?.stock === 0"   
+      (click)="onAddToCart()"
+      [ngStyle]="{ 
+              'background-color': addedToCart ? 'green' : 'red',
+              'color': 'white'  }">
+  {{ addedToCart ? 'Ajouté au panier' : 'Ajouter au panier' }}
+</button>
     </div>
   `,
   styleUrls: ['./product.component.css']
@@ -29,6 +34,7 @@ import { Product } from './product.types';
 export class ProductComponent {
   @Input() product?: Product;
   addedToCart: boolean = false;
+
   onAddToCart() {
     this.addedToCart = true; 
     console.log('Produit ajouté au panier',this.product?.title);
@@ -41,5 +47,9 @@ export class ProductComponent {
       ? this.product.photo 
       : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Y2SLfdkXPJMxZ2QtRIK1fy2Lvnr6UVgmzQ&s';
   }
-  
+   messageAffich = () =>
+  {
+
+    return ;
+  }
 }
