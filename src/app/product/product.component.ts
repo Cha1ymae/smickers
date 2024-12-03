@@ -31,7 +31,7 @@ export class ProductComponent {
   addedToCart: boolean = false;
   onAddToCart() {
     this.addedToCart = true; 
-    console.log('Produit ajouté au panier');
+    console.log('Produit ajouté au panier',this.product?.title);
     setTimeout(() => {
       this.addedToCart = false;
     }, 5000);
