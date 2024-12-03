@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 
 @Component({
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './season-carousel.component.html',
   styleUrls: ['./season-carousel.component.css']
 })
-export class SeasonCarouselComponent {
+export class SeasonCarouselComponent implements OnInit,OnDestroy{
   seasons: { [key: string]: string[] } = {
     été: [
       'https://i.pinimg.com/474x/88/05/73/880573114ca070645798842c4373fa12.jpg',
