@@ -4,7 +4,7 @@ import { Product } from './product.types';
 
 @Component({
   selector: 'app-product',
-  imports: [NgStyle, NgIf, UpperCasePipe, CurrencyPipe],
+  imports: [NgStyle, UpperCasePipe, CurrencyPipe],
   template: `
     <div class="product">
       <img
@@ -19,15 +19,17 @@ import { Product } from './product.types';
       </div>
       <button
         class="add-to-cart"
-        *ngIf="product?.stock != 0"
+        [disabled]="product?.stock === 0"
+        class="add-to-cart"
         [disabled]="product?.stock === 0"
         (click)="onAddToCart()"
         [ngStyle]="{
-          'background-color': addedToCart ? 'green' : 'red',
+          'background-color': addedToCart ? 'green' : (product?.stock === 0 ? 'gray' : 'red'),
+          'cursor': product?.stock === 0 ? 'not-allowed' : 'pointer',
           color: 'white'
         }"
       >
-        {{ addedToCart ? 'Ajouté au panier' : 'Ajouter au panier' }}
+        {{ product?.stock === 0 ? 'Pas de stock' : (addedToCart ? 'Ajouté au panier' : 'Ajouter au panier') }}
       </button>
     </div>
   `,
