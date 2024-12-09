@@ -13,24 +13,8 @@
     <app-product *ngFor="let product of myProducts" [product]="product"></app-product>
   </div>
   <app-season-carousel (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
-  <router-outlet></router-outlet>
-
-  <div class="newsletter-section">
-    <div class="newsletter-container">
-      <h2>Join Our Newsletter</h2>
-      <p>Get updates on new products, special offers, and baking tips!</p>
-      <form class="newsletter-form">
-        <input
-          type="email"
-          placeholder="Enter your email"
-          class="newsletter-input"
-          required
-        />
-        <button type="submit" class="newsletter-button">Subscribe</button>
-      </form>
-    </div>
-  </div>
+  <app-news-letter></app-news-letter>
+ 
 </main>
 
 <app-footer></app-footer>
-<router-outlet></router-outlet>

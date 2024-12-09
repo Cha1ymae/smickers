@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { SeasonCarouselComponent } from "./season-carousel/season-carousel.component";
 import { MyProductService } from './my-product.service';
 import { SneakersComponent } from "./sneakers/sneakers.component";
+import { NewsLetterComponent } from "./news-letter/news-letter.component";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { SneakersComponent } from "./sneakers/sneakers.component";
     HeaderComponent,
     ProductComponent,
     SeasonCarouselComponent,
+    NewsLetterComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
