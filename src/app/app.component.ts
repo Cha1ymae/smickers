@@ -13,7 +13,6 @@ import { NewsLetterComponent } from "./news-letter/news-letter.component";
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     FooterComponent,
     HeaderComponent,
@@ -36,5 +35,12 @@ export class AppComponent implements OnInit {
 
  onSeasonChanged(season: string) {
   this.selectedCategory = season;
+}
+
+scrollToProducts(): void {
+  const productSection = document.getElementById('product-section');
+  if (productSection) {
+    productSection.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 }

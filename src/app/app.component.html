@@ -5,11 +5,11 @@
     <div class="description">
       <h1>Bienvenue sur Smickers</h1>
       <p>Découvrez nos collections exclusives et les meilleures offres pour vos sneakers préférés!</p>
-      <button class="cta-button">Explorer Maintenant</button>
+      <button class="cta-button" (click)="scrollToProducts()">Explorer Maintenant</button>
     </div>
   </div>
 
-  <div class="product-grid">
+  <div id="product-section" class="product-grid">
     <app-product *ngFor="let product of myProducts" [product]="product"></app-product>
   </div>
   <app-season-carousel (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
