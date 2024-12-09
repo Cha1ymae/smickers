@@ -19,7 +19,6 @@ export class SneakersComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.selectedCategory = params['category'] || 'été'; 
-      console.log(`Catégorie initialisée dans SneakersComponent : ${this.selectedCategory}`);
     });
   }
 }

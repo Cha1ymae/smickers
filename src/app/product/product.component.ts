@@ -39,11 +39,17 @@ export class ProductComponent {
   @Input() product?: Product;
   addedToCart: boolean = false;
   onAddToCart() {
+    if (this.product?.stock && this.product?.stock > 0) {
+      this.product.stock--;
+      console.log(`Stock restant : ${this.product?.stock}`);
     this.addedToCart = true;
     console.log('Produit ajouté au panier', this.product?.title);
     setTimeout(() => {
       this.addedToCart = false;
     }, 5000);
+  }else {
+      console.log('Stock épuisé, impossible d\'ajouter au panier');
+    }
   }
   get productImage(): string {
     return this.product?.photo?.trim()

@@ -43,7 +43,6 @@ export class SeasonCarouselComponent implements OnInit,OnDestroy{
     this.currentIndex = (this.currentIndex + 1) % this.seasonOrder.length;
     this.currentSeason = this.seasonOrder[this.currentIndex];
   
-    console.log(`Vous avez choisi : ${this.currentSeason}`);
     this.seasonChanged.emit(this.currentSeason);
     this.router.navigate(['/sneakers'], { queryParams: { category: this.currentSeason } });  
     return this.currentSeason;

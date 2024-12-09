@@ -18,7 +18,6 @@ import { SneakersComponent } from "./sneakers/sneakers.component";
     HeaderComponent,
     ProductComponent,
     SeasonCarouselComponent,
- //   SneakersComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -35,6 +34,5 @@ export class AppComponent implements OnInit {
 
  onSeasonChanged(season: string) {
   this.selectedCategory = season;
-  console.log(`Saison sélectionnée : ${this.selectedCategory}`);
 }
 }
