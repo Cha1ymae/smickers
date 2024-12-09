@@ -5,9 +5,9 @@
 
   <div class="navigation">
     <nav class="nav-links">
-      <a mat-button routerLink="/sneakers">Sneakers</a>
-      <a mat-button routerLink="/chaussures">Chaussures</a>
-      <a mat-button routerLink="/streetwear">Streetwear</a>
+      <a mat-button (click)="scrollTo('product-section')">Sneakers</a>
+      <a mat-button (click)="scrollTo('category-section')">Catégories</a>
+      <a mat-button (click)="scrollTo('news-section')">Newsletter</a>
     </nav>
 
     <mat-form-field class="search-field" appearance="outline">

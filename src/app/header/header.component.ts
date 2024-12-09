@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
   standalone: true,
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'], // Utilisation de CSS
+  styleUrls: ['./header.component.css'],
   imports: [
     MatToolbarModule,
     MatIconModule,
@@ -18,4 +18,11 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule
   ],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  scrollTo(sectionId: string): void {
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
