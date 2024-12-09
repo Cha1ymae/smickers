@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-season-carousel',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./season-carousel.component.css']
 })
 export class SeasonCarouselComponent implements OnInit,OnDestroy{
+  @Output() seasonChanged = new EventEmitter<string>();
   seasons: { [key: string]: string[] } = {
     été: [
       'https://i.pinimg.com/474x/88/05/73/880573114ca070645798842c4373fa12.jpg',
@@ -35,11 +37,18 @@ export class SeasonCarouselComponent implements OnInit,OnDestroy{
   currentSeason: string = 'été'; 
   seasonOrder: string[] = ['été', 'hiver', 'printemps', 'automne']; 
   currentIndex: number = 0; 
+  constructor(private router: Router) {}
 
   changeSeason() {
     this.currentIndex = (this.currentIndex + 1) % this.seasonOrder.length;
     this.currentSeason = this.seasonOrder[this.currentIndex];
+  
+    console.log(`Vous avez choisi : ${this.currentSeason}`);
+    this.seasonChanged.emit(this.currentSeason);
+    this.router.navigate(['/sneakers'], { queryParams: { category: this.currentSeason } });  
+    return this.currentSeason;
   }
+  
 
   private intervalId: any;
 

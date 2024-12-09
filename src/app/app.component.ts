@@ -4,9 +4,9 @@ import { RouterOutlet } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { Product } from './product/product.types';
 import { SeasonCarouselComponent } from "./season-carousel/season-carousel.component";
 import { MyProductService } from './my-product.service';
+import { SneakersComponent } from "./sneakers/sneakers.component";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,8 @@ import { MyProductService } from './my-product.service';
     FooterComponent,
     HeaderComponent,
     ProductComponent,
-    SeasonCarouselComponent
+    SeasonCarouselComponent,
+ //   SneakersComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -25,9 +26,15 @@ import { MyProductService } from './my-product.service';
 export class AppComponent implements OnInit {
  title = 'smickers';
  myProducts = new Array();
+ selectedCategory: string = '';
  constructor(private myProductService: MyProductService) {}
  
  ngOnInit(): void {
    this.myProducts = this.myProductService.getAllProduct();
  }
+
+ onSeasonChanged(season: string) {
+  this.selectedCategory = season;
+  console.log(`Saison sélectionnée : ${this.selectedCategory}`);
+}
 }

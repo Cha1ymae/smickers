@@ -111,4 +111,7 @@ export class MyProductService {
     return this.products.find((products)=> products.title === name)
 
   }
+  getProductsByCategory(category: string){
+    return this.products.filter(product => product.category === category);
+  }
 }

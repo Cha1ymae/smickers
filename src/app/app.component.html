@@ -12,9 +12,9 @@
   <div class="product-grid">
     <app-product *ngFor="let product of myProducts" [product]="product"></app-product>
   </div>
-  <app-season-carousel></app-season-carousel>
+  <app-season-carousel (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
+  <router-outlet></router-outlet>
 
-  <!-- Newsletter Section -->
   <div class="newsletter-section">
     <div class="newsletter-container">
       <h2>Join Our Newsletter</h2>
