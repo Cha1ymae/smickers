@@ -1,12 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { RouterOutlet } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SeasonCarouselComponent } from "./season-carousel/season-carousel.component";
 import { MyProductService } from './my-product.service';
-import { SneakersComponent } from "./sneakers/sneakers.component";
 import { NewsLetterComponent } from "./news-letter/news-letter.component";
 
 @Component({
@@ -25,13 +23,14 @@ import { NewsLetterComponent } from "./news-letter/news-letter.component";
 })
 export class AppComponent implements OnInit {
  title = 'smickers';
- myProducts = new Array();
+ protected myProducts = new Array();
  selectedCategory: string = '';
- constructor(private myProductService: MyProductService) {}
+ constructor(private myProductService : MyProductService) {}
  
  ngOnInit(): void {
-   this.myProducts = this.myProductService.getAllProduct();
- }
+  this.myProductService
+  .getProducts().subscribe((response) => this.myProducts = response.data);
+}
 
  onSeasonChanged(season: string) {
   this.selectedCategory = season;

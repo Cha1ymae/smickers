@@ -40,11 +40,5 @@ export class HeaderComponent {
       return;
     }
 
-    const products = this.productService.products.filter(product => 
-      product.title.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query)
-    );
-
-    console.log('Résultats de recherche:', products);
-  }
+     }
 }
