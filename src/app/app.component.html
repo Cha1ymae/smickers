@@ -10,13 +10,12 @@
   </div>
 
   <div id="product-section" class="product-grid">
-    <app-product *ngFor="let product of myProducts" [product]="product"></app-product>
+    <app-product *ngFor="let product of myProducts()" [product]="product"></app-product>
   </div>
   
-    <app-season-carousel id="category-section" (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
+  <app-season-carousel id="category-section" (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
 
   <app-news-letter id="news-section"></app-news-letter>
- 
 </main>
 
 <app-footer></app-footer>
