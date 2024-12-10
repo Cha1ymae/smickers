@@ -28,9 +28,10 @@ export class MyProductService {
       return this.http.get<Product[]>(`${this.apiUrl}/api/v1/products/byTitle/${title}`);
     }
   
-    getProductByCategorie(): Observable<ProductsData> {
-      return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/categories`);
-    }
+    getProductByCategorie(category: string): Observable<Product[]> {
+      return this.http.get<Product[]>(`${this.apiUrl}/api/v1/products?category=${category}`);
+    }    
+    
   
 
 }

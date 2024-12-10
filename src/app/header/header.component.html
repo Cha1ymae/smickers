@@ -6,9 +6,10 @@
   <div class="navigation">
     <nav class="nav-links">
       <a mat-button (click)="scrollTo('product-section')">Sneakers</a>
-      <a mat-button (click)="scrollTo('category-section')">Catégories</a>
+      <a mat-button (click)="navigateToCategory('Categories')">Catégories</a>
       <a mat-button (click)="scrollTo('news-section')">Newsletter</a>
     </nav>
+    
 
     <mat-form-field class="search-field" appearance="outline">
       <input matInput placeholder="Rechercher une marque, un modèle..." 
@@ -34,4 +35,5 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
+  
 </mat-toolbar>

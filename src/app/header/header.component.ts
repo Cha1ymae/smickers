@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MyProductService } from '../my-product.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -24,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 export class HeaderComponent {
   searchQuery: string = '';
 
-  constructor(private productService: MyProductService) {}
+  constructor(private productService: MyProductService, private router: Router) {}
 
   scrollTo(sectionId: string): void {
     const targetSection = document.getElementById(sectionId);
@@ -40,5 +42,9 @@ export class HeaderComponent {
       return;
     }
 
-     }
+  }
+
+  navigateToCategory(category: string): void {
+    this.router.navigate(['/category', category]);
+  }
 }

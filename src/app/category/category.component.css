@@ -1,0 +1,13 @@
+.seasons-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  
