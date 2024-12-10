@@ -1,21 +1,3 @@
 <app-header></app-header>
-
-<main class="main">
-  <div class="hero-section">
-    <div class="description">
-      <h1>Bienvenue sur Smickers</h1>
-      <p>Découvrez nos collections exclusives et les meilleures offres pour vos sneakers préférés!</p>
-      <button class="cta-button" (click)="scrollToProducts()">Explorer Maintenant</button>
-    </div>
-  </div>
-
-  <div id="product-section" class="product-grid">
-    <app-product *ngFor="let product of myProducts()" [product]="product"></app-product>
-  </div>
-  
-  <app-season-carousel id="category-section" (seasonChanged)="onSeasonChanged($event)"></app-season-carousel>
-
-  <app-news-letter id="news-section"></app-news-letter>
-</main>
-
+<router-outlet></router-outlet>
 <app-footer></app-footer>

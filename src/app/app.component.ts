@@ -1,12 +1,8 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from './product/product.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { SeasonCarouselComponent } from './season-carousel/season-carousel.component';
-import { MyProductService } from './my-product.service';
-import { NewsLetterComponent } from './news-letter/news-letter.component';
-import { Product } from './product/product.types';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,38 +11,13 @@ import { Product } from './product/product.types';
     CommonModule,
     FooterComponent,
     HeaderComponent,
-    ProductComponent,
-    SeasonCarouselComponent,
-    NewsLetterComponent
-  ],
+    RouterModule
+      ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   title = 'smickers';
 
-  myProducts = signal<Product[]>([]);
-
-  inStock = computed(() => this.myProducts().filter((product) => product.stock > 0));
-
-  selectedCategory: string = '';
-
-  constructor(private myProductService: MyProductService) {}
-
-  ngOnInit(): void {
-    this.myProductService.getProducts().subscribe((response) => {
-      this.myProducts.set(response.data);
-    });
-  }
-
-  onSeasonChanged(season: string): void {
-    this.selectedCategory = season;
-  }
-
-  scrollToProducts(): void {
-    const productSection = document.getElementById('product-section');
-    if (productSection) {
-      productSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  
 }
