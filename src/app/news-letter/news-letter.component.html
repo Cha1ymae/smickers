@@ -1,15 +1,18 @@
 <div class="newsletter-section">
-    <div class="newsletter-container">
-      <h2>Join Our Newsletter</h2>
-      <p>Get updates on new products, special offers, and baking tips!</p>
-      <form class="newsletter-form">
-        <input
-          type="email"
-          placeholder="Enter your email"
-          class="newsletter-input"
-          required
-        />
-        <button type="submit" class="newsletter-button">Subscribe</button>
-      </form>
-    </div>
+  <div class="newsletter-container">
+    <h2>Join Our Newsletter</h2>
+    <p>Get updates on new products, special offers, and baking tips!</p>
+    <form #newsForm="ngForm" class="newsletter-form" (ngSubmit)="submitForm(newsForm.value)">
+      <input
+        name="email"
+        ngModel
+        #emailModel="ngModel"
+        type="email"
+        placeholder="Enter your email"
+        class="newsletter-input"
+        required
+      />
+      <button type="submit" class="newsletter-button">Subscribe</button>
+    </form>
   </div>
+</div>

@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-news-letter',
-  imports: [],
+  imports:[FormsModule,],
   templateUrl: './news-letter.component.html',
-  styleUrl: './news-letter.component.css'
+  styleUrls: ['./news-letter.component.css'],
 })
 export class NewsLetterComponent {
+  @ViewChild('newsForm') userForm!: NgForm;
 
+  submitForm(newsFormValue: { email: string }) {
+    console.log('Email entered:', newsFormValue.email);
+  }
 }
