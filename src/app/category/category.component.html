@@ -1,1 +1,23 @@
-<p>category works!</p>
+<h1 *ngIf="!categoryName">Choisissez une catégorie :</h1>
+<div class="seasons-container" *ngIf="!categoryName">
+  <button 
+    *ngFor="let season of seasons" 
+    mat-raised-button 
+    color="primary" 
+    (click)="navigateToSeason(season)"
+  >
+    {{ season }}
+  </button>
+</div>
+
+<h1 *ngIf="categoryName">Catégorie : {{ categoryName | uppercase }}</h1>
+<div *ngIf="categoryName && products.length > 0" class="product-list">
+  <app-product
+    *ngFor="let product of products"
+    [product]="product"
+  ></app-product>
+</div>
+
+<div *ngIf="categoryName && products.length === 0">
+  <p>Aucun produit trouvé pour cette catégorie.</p>
+</div>
