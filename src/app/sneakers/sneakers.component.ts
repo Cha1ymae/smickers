@@ -23,7 +23,7 @@ export class SneakersComponent implements OnInit{
   constructor(private myProductService: MyProductService) {}
 
   ngOnInit(): void {
-    this.myProductService.getProducts().subscribe((response) => {
+    this.myProductService.getAllProducts().subscribe((response) => {
       this.myProducts.set(response.data);
     });
   }

@@ -3,35 +3,43 @@ import { Product } from './product/product.types';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-type ProductsData = 
-{
-  data : Array<Product>,
-  hasNextPage : boolean;
-}
+type Category = {
+  id: string;
+  name: string;
+  products: Product[];
+};
+type CategoriesData = {
+  data: Category[];
+  hasNextPage: boolean;
+};
+type ProductsData = {
+  data: Product[];
+  hasNextPage: boolean;
+};
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MyProductService {
-  products?: Product;
-  apiUrl : String = 'https://enigma-smickers-backend-73e446c36fde.herokuapp.com'
-  constructor(private http : HttpClient) { }
+  apiUrl: string = 'https://enigma-smickers-backend-73e446c36fde.herokuapp.com';
+  allCategories: Category[] = [];
+  allProducts: Product[] = [];
 
-    getProducts(): Observable<ProductsData> {
-      return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/products`);
-    }
-  
-    getProductById(id: number): Observable<Array<Product>> {
-      return this.http.get<Product[]>(`${this.apiUrl}/api/v1/products/${id}`);
-    }
+  constructor(private http: HttpClient) {}
 
-    getProductByName(title : string): Observable<Array<Product>> {
-      return this.http.get<Product[]>(`${this.apiUrl}/api/v1/products/byTitle/${title}`);
-    }
-  
-    getProductByCategorie(category: string): Observable<Product[]> {
-      return this.http.get<Product[]>(`${this.apiUrl}/api/v1/products?category=${category}`);
-    }    
-    
-  
+  getCategories(): Observable<CategoriesData> {
+    return this.http.get<CategoriesData>(`${this.apiUrl}/api/v1/categories`);
+  }
 
+  getProductsByCategoryId(categoryId: string): Observable<ProductsData> {
+    return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/categories/${categoryId}`);
+  }
+
+  getAllProducts(): Observable<ProductsData> {
+    return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/products`);
+  }
+  getProductByCategorieId(categoryId: string): Observable<{ products: Product[] }> {
+    return this.http.get<{ products: Product[] }>(`${this.apiUrl}/api/v1/categories/${categoryId}`);
+  }
+  
 }

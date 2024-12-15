@@ -20,8 +20,6 @@ import { Product } from './product.types';
       <button
         class="add-to-cart"
         [disabled]="product?.stock === 0"
-        class="add-to-cart"
-        [disabled]="product?.stock === 0"
         (click)="onAddToCart()"
         [ngStyle]="{
           'background-color': addedToCart ? 'green' : (product?.stock === 0 ? 'gray' : 'red'),
@@ -38,19 +36,21 @@ import { Product } from './product.types';
 export class ProductComponent {
   @Input() product?: Product;
   addedToCart: boolean = false;
+
   onAddToCart() {
     if (this.product?.stock && this.product?.stock > 0) {
       this.product.stock--;
       console.log(`Stock restant : ${this.product?.stock}`);
-    this.addedToCart = true;
-    console.log('Produit ajouté au panier', this.product?.title);
-    setTimeout(() => {
-      this.addedToCart = false;
-    }, 5000);
-  }else {
+      this.addedToCart = true;
+      console.log('Produit ajouté au panier', this.product?.title);
+      setTimeout(() => {
+        this.addedToCart = false;
+      }, 5000);
+    } else {
       console.log('Stock épuisé, impossible d\'ajouter au panier');
     }
   }
+
   get productImage(): string {
     return this.product?.photo?.trim()
       ? this.product.photo

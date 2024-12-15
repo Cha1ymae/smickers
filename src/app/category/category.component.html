@@ -10,14 +10,22 @@
   </button>
 </div>
 
-<h1 *ngIf="categoryName">Catégorie : {{ categoryName | uppercase }}</h1>
-<div *ngIf="categoryName && products.length > 0" class="product-list">
+<div *ngIf="loading" class="loading-spinner">
+  <p>Chargement des produits...</p>
+</div>
+
+<div *ngIf="!loading && filteredProducts.length > 0" class="products-container">
   <app-product
-    *ngFor="let product of products"
+    *ngFor="let product of filteredProducts"
     [product]="product"
   ></app-product>
 </div>
 
-<div *ngIf="categoryName && products.length === 0">
+<div *ngIf="!loading && filteredProducts?.length === 0" class="no-products">
   <p>Aucun produit trouvé pour cette catégorie.</p>
 </div>
+
+<ng-template #noProducts>
+  <p>Aucun produit trouvé pour la catégorie {{ categoryName }}.</p>
+</ng-template>
+
