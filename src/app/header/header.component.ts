@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MyProductService } from '../my-product.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -41,10 +40,18 @@ export class HeaderComponent {
       console.log('Veuillez saisir un terme de recherche.');
       return;
     }
-
+    // Add search logic here if needed
   }
 
   navigateToCategory(category: string): void {
     this.router.navigate(['/category', category]);
+  }
+
+  goToCart(): void {
+    this.router.navigate(['/cart']);
+  }
+  
+  goToPanier(): void {
+    this.router.navigate(['/panier']);
   }
 }

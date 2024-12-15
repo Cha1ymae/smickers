@@ -9,12 +9,10 @@
       <a mat-button (click)="navigateToCategory('Categories')">Catégories</a>
       <a mat-button (click)="scrollTo('news-section')">Newsletter</a>
     </nav>
-    
 
     <mat-form-field class="search-field" appearance="outline">
       <input matInput placeholder="Rechercher une marque, un modèle..." 
-      [(ngModel)]="searchQuery"
-      (keydown.enter)="handleSearch()"/>
+        [(ngModel)]="searchQuery" (keydown.enter)="handleSearch()"/>
       <button mat-icon-button matSuffix (click)="handleSearch()">
         <mat-icon>search</mat-icon>
       </button>
@@ -28,12 +26,11 @@
     <button mat-icon-button>
       <mat-icon>favorite</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="goToPanier()">
       <mat-icon>shopping_cart</mat-icon>
     </button>
     <button mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  
 </mat-toolbar>
