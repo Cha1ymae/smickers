@@ -1,23 +1,25 @@
 <div class="newsletter-section">
   <div class="newsletter-container">
-    <h2>Join Our Newsletter</h2>
-    <p>Get updates on new products, special offers, and baking tips!</p>
+    <h2>Joignez notre newsletter</h2>
+    <p>Recevez les nouvelles, les promotions et tout ce qui nous concerne!</p>
     <form #newsForm="ngForm" class="newsletter-form" (ngSubmit)="submitForm(newsForm.value)">
-      <input
-        name="email"
-        ngModel
-        #emailModel="ngModel"
-        type="email"
-        placeholder="Enter your email"
-        class="newsletter-input"
-        required
-      />
-      @if (emailModel.invalid && emailModel.touched) {
-        <div class="error-message">
-          Please enter a valid email address.
+      <div class="input-wrapper">
+        <input
+          name="email"
+          ngModel
+          #emailModel="ngModel"
+          type="email"
+          placeholder="Entrez votre email"
+          class="newsletter-input"
+          required
+          email
+          [class.invalid]="emailModel.invalid && emailModel.touched"
+        />
+        <div *ngIf="emailModel.invalid && emailModel.touched" class="error-message">
+          Veuillez entrer une adresse email valide.
         </div>
-      }  
-      <button  [disabled]="!newsForm.valid" type="submit" class="newsletter-button">Subscribe</button>
+      </div>
+      <button [disabled]="!newsForm.valid" type="submit" class="newsletter-button">S'abonner</button>
     </form>
   </div>
 </div>
