@@ -13,6 +13,7 @@ import { CurrencyPipe, NgStyle } from '@angular/common';
         [src]="productImage"
         class="product-image"
         alt="{{ product?.title }}"
+        (error)="onImageError($event)" 
       />
       <div class="product-info">
         <h1>{{ product?.title  }}</h1>
@@ -51,19 +52,9 @@ export class ProductComponent {
   addedToCart: boolean = false;
   selectedSize: string = 'M';
   quantity: number = 1; 
-   item: CartItem = {
-    id: '123',
-    title: 'Sneaker Example',
-    price: 100,
-    size: 'M',
-    quantity: 1,
-    photo: 'example-photo.jpg'
-  };
+  defaultImageUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Y2SLfdkXPJMxZ2QtRIK1fy2Lvnr6UVgmzQ&s';
   
-  
-  constructor(private panierService: PanierService) { panierService.addToCart(this.item);}
-  
-  
+  constructor(private panierService: PanierService) {}
 
   onAddToCart() {
     if (this.product?.stock && this.product?.stock > 0) {
@@ -102,6 +93,10 @@ export class ProductComponent {
   get productImage(): string {
     return this.product?.photo?.trim()
       ? this.product.photo
-      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Y2SLfdkXPJMxZ2QtRIK1fy2Lvnr6UVgmzQ&s';
+      : this.defaultImageUrl;
+  }
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.defaultImageUrl; 
   }
 }
