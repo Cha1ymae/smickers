@@ -14,7 +14,7 @@ export class PanierComponent implements OnInit {
   constructor(private panierService: PanierService) {}
 
   ngOnInit(): void {
-    this.panierService.fetchCart(); 
+    this.panierService.fetchCart();
     this.panierService.getCart().subscribe((items) => {
       this.cartItems = items;
     });

@@ -51,14 +51,30 @@ export class ProductComponent {
   addedToCart: boolean = false;
   selectedSize: string = 'M';
   quantity: number = 1; 
-
-  constructor(private panierService: PanierService) {}
+   item: CartItem = {
+    id: '123',
+    title: 'Sneaker Example',
+    price: 100,
+    size: 'M',
+    quantity: 1,
+    photo: 'example-photo.jpg'
+  };
+  
+  
+  constructor(private panierService: PanierService) { panierService.addToCart(this.item);}
+  
+  
 
   onAddToCart() {
     if (this.product?.stock && this.product?.stock > 0) {
+      if (!this.product) {
+        console.error('Produit non défini');
+        return;
+      }
+  
       this.product.stock -= this.quantity;
       console.log(`Stock restant : ${this.product?.stock}`);
-
+  
       const cartItem: CartItem = {
         id: this.product.id,
         title: this.product.title,
@@ -67,12 +83,14 @@ export class ProductComponent {
         quantity: this.quantity,
         photo: this.product.photo,
       };
-
+  
+      console.log('Produit ajouté au panier', cartItem);
+  
       this.panierService.addToCart(cartItem);
-      
+  
       this.addedToCart = true;
       console.log('Produit ajouté au panier', this.product?.title);
-
+  
       setTimeout(() => {
         this.addedToCart = false;
       }, 5000);

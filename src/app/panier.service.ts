@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 
 export interface CartItem {
   id: string;
@@ -28,16 +28,29 @@ export class PanierService {
     });
   }
 
-  addToCart(item: CartItem): void {
-    const payload = {
-      productId: item.id,
-      size: item.size,
-      quantity: item.quantity,
+  async addToCart(item: CartItem): Promise<void> {
+    console.log('Item ajouté :', item);
+
+    if (!item || !item.id) {
+      console.error('Produit invalide', item);
+      return;
+    }
+
+    const productPayload = {
+      products: [
+        {
+          id: item.id       
+        },
+      ],
     };
 
-    this.http.patch<CartItem>(this.apiUrl, payload).subscribe(() => {
+    try {
+      const response = await firstValueFrom(this.http.patch(this.apiUrl, productPayload));
+      console.log('Produit ajouté au panier', response);
       this.fetchCart(); 
-    });
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout au panier', error);
+    }
   }
 
   updateQuantity(itemId: string, size: string, quantity: number): void {

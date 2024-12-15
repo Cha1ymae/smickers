@@ -44,7 +44,6 @@ export class SeasonCarouselComponent implements OnInit,OnDestroy{
     this.currentSeason = this.seasonOrder[this.currentIndex];
   
     this.seasonChanged.emit(this.currentSeason);
-    console.log("saison : ", this.seasonChanged);
     return this.currentSeason;
   }
   
