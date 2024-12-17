@@ -15,10 +15,10 @@ export const routes: Routes = [
   {
     path: 'category/:category', 
     component: CategoryComponent,
-  {
   },
+  {
      path: 'panier',
-   component: PanierComponent 
+   component: PanierComponent ,
   },
   { 
     path: 'contacts',
@@ -28,5 +28,8 @@ export const routes: Routes = [
     path: 'products',
      component: OnlyProductsComponent 
   },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'confirmation', component: ConfirmationComponent },
+  { path: 'panier', component: PanierComponent },
 
 ];
