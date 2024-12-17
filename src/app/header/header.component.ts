@@ -40,15 +40,14 @@ export class HeaderComponent {
       console.log('Veuillez saisir un terme de recherche.');
       return;
     }
-    // Add search logic here if needed
   }
 
   navigateToCategory(category: string): void {
     this.router.navigate(['/category', category]);
   }
 
-  goToCart(): void {
-    this.router.navigate(['/cart']);
+  navigateToProducts(products: string): void {
+    this.router.navigate(['/', products]);
   }
   
   goToPanier(): void {
