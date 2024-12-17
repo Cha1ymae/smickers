@@ -4,14 +4,20 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-news-letter',
-  imports:[FormsModule,CommonModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './news-letter.component.html',
   styleUrls: ['./news-letter.component.css'],
 })
 export class NewsLetterComponent {
   @ViewChild('newsForm') userForm!: NgForm;
+  email: string = '';
+  showCoupon: boolean = false;
+  couponCode: string = 'Hugomid';
 
   submitForm(newsFormValue: { email: string }) {
-    console.log('Email entered:', newsFormValue.email);
+    if (newsFormValue.email) {
+      this.showCoupon = true;
+    }
   }
 }

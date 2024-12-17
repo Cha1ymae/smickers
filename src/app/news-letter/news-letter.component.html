@@ -21,5 +21,12 @@
       </div>
       <button [disabled]="!newsForm.valid" type="submit" class="newsletter-button">S'abonner</button>
     </form>
+
+    <div *ngIf="showCoupon" class="coupon-message">
+      <p>
+        Merci pour votre inscription ! Utilisez le code
+        <strong>{{ couponCode }}</strong> pour bénéficier de <strong>10% de réduction</strong>.
+      </p>
+    </div>
   </div>
 </div>

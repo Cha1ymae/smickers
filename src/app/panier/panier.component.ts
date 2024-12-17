@@ -18,7 +18,8 @@ export class PanierComponent implements OnInit {
   constructor(private panierService: PanierService, private router: Router) {}
 
   goToCheckout(): void {
-    this.router.navigate(['/checkout']);
+    const total = this.getTotal();
+    this.router.navigate(['/checkout'], { state: { total } });
   }
 
   ngOnInit(): void {
@@ -48,9 +49,6 @@ export class PanierComponent implements OnInit {
   }
 
   getTotal(): number {
-    return this.cartItems.reduce(
-      (total, item) => total + item.price * (item.quantity || 1),
-      0
-    );
+    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 }

@@ -1,6 +1,6 @@
 <div class="order-form-container">
     <h2>Informations de commande</h2>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
       <div class="form-group">
         <label for="fullName">Nom complet :</label>
         <input id="fullName" type="text" [(ngModel)]="orderData.fullName" name="fullName" required />
@@ -17,10 +17,20 @@
       </div>
   
       <div class="form-group">
+        <label for="city">Ville :</label>
+        <input id="city" type="text" [(ngModel)]="orderData.city" name="city" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="postalCode">Code postal :</label>
+        <input id="postalCode" type="text" [(ngModel)]="orderData.postalCode" name="postalCode" required />
+      </div>
+  
+      <div class="form-group">
         <label for="delivery">Mode de livraison :</label>
-        <select id="delivery" [(ngModel)]="orderData.delivery" name="delivery" required>
-          <option value="Standard">Standard</option>
-          <option value="Express">Express</option>
+        <select id="delivery" [(ngModel)]="orderData.delivery" name="delivery" (change)="onDeliveryChange()" required>
+          <option value="Standard">Standard (0,00€)</option>
+          <option value="Express">Express (28,90€)</option>
         </select>
       </div>
   
@@ -33,7 +43,21 @@
         </select>
       </div>
   
-      <button type="submit" class="confirm-button">Confirmer la commande</button>
+      <div class="form-group">
+        <label for="couponCode">Code coupon :</label>
+        <input id="couponCode" type="text" [(ngModel)]="couponCode" name="couponCode" placeholder="Entrez votre code coupon" />
+        <button type="button" (click)="applyCoupon()" class="coupon-button">Appliquer</button>
+      </div>
+  
+      <div class="form-summary">
+        <p>Frais de livraison : {{ deliveryFee | currency:'EUR':'symbol':'1.2-2' }}</p>
+        <p>Réduction : -{{ discount | currency:'EUR':'symbol':'1.2-2' }}</p>
+        <p>
+          <strong>Total : {{ calculateTotal() | currency:'EUR':'symbol':'1.2-2' }}</strong>
+        </p>
+      </div>
+  
+      <button type="submit" class="confirm-button" [disabled]="!checkoutForm.valid">Confirmer la commande</button>
     </form>
   </div>
   
