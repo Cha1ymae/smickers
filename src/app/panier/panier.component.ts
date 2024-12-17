@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PanierService, CartItem } from '../panier.service';
+import { CartItem, PanierService } from '../panier.service';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -7,6 +7,7 @@ import { NgFor, NgIf } from '@angular/common';
   selector: 'app-panier',
   imports:[FormsModule,NgIf,NgFor],
   templateUrl: './panier.component.html',
+  styleUrls: ['./panier.component.css'],
 })
 export class PanierComponent implements OnInit {
   cartItems: CartItem[] = [];
@@ -14,27 +15,39 @@ export class PanierComponent implements OnInit {
   constructor(private panierService: PanierService) {}
 
   ngOnInit(): void {
-    this.panierService.fetchCart();
     this.panierService.getCart().subscribe((items) => {
-      this.cartItems = items;
+      this.cartItems = items.map((item) => ({
+        ...item,
+        quantity: item.quantity || 1, 
+      }));
     });
+    this.panierService.fetchCart();
   }
 
-  updateQuantity(item: CartItem) {
-    this.panierService.updateQuantity(item.id, item.size, item.quantity);
+
+  updateQuantity(item: CartItem): void {
+    if (item.quantity && item.quantity > 0) {
+      this.panierService.updateQuantity(item.id, item.size || '', item.quantity);
+    } else {
+      console.warn('La quantité doit être supérieure à 0');
+      item.quantity = 1; 
+    }
   }
 
-  removeItem(item: CartItem) {
-    this.panierService.removeItem(item.id, item.size);
+
+  removeItem(item: CartItem): void {
+    this.panierService.removeItem(item.id, item.size || '');
   }
 
-  clearCart() {
+
+  clearCart(): void {
     this.panierService.clearCart();
   }
 
+
   getTotal(): number {
     return this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) => total + item.price * (item.quantity || 1),
       0
     );
   }
