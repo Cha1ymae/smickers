@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product/product.types';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 type Category = {
   id: string;
@@ -42,4 +42,22 @@ export class MyProductService {
     return this.http.get<{ products: Product[] }>(`${this.apiUrl}/api/v1/categories/${categoryId}`);
   }
   
+  searchProducts(query: string): Observable<Product[]> {
+    const lowercasedQuery = query.toLowerCase();
+    const filteredProducts = this.allProducts.filter(
+      (product) =>
+        product.title.toLowerCase().includes(lowercasedQuery) ||
+        product.description.toLowerCase().includes(lowercasedQuery)
+    );
+    console.log(filteredProducts);
+    return of(filteredProducts);
+  }
+  
+  loadAllProducts(): Observable<ProductsData> {
+    return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/products`).pipe(
+      tap(response => {
+        this.allProducts = response.data;
+      })
+    );
+  }
 }

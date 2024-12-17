@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
   <div class="logo">
-    <a routerLink="/" class="brand">Smickers</a>
+    <span class="brand">Smickers</span>
   </div>
 
   <div class="navigation">
@@ -25,3 +25,18 @@
     </button>
   </div>
 </mat-toolbar>
+<div *ngIf="searchResults.length > 0" class="search-results-container">
+  <h3 class="search-results-title">Résultats de recherche</h3>
+  <ul class="search-results-list">
+    <li *ngFor="let product of searchResults" class="search-result-item">
+      <div class="product-info">
+        <span class="product-title">{{ product.title }}</span>
+        <span class="product-description">{{ product.description }}</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="searchResults.length === 0 && searchQuery.length > 0" class="no-results">
+  <p>Aucun produit trouvé pour "<strong>{{ searchQuery }}</strong>".</p>
+</div>
