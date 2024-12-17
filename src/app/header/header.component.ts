@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MyProductService } from '../my-product.service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -14,12 +14,13 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   imports: [
-    MatToolbarModule,
     MatIconModule,
+    MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    RouterModule, // Importé pour routerLink
   ],
 })
 export class HeaderComponent {
@@ -40,17 +41,13 @@ export class HeaderComponent {
       console.log('Veuillez saisir un terme de recherche.');
       return;
     }
-    // Add search logic here if needed
+    console.log('Recherche en cours pour:', query);
   }
 
   navigateToCategory(category: string): void {
     this.router.navigate(['/category', category]);
   }
 
-  goToCart(): void {
-    this.router.navigate(['/cart']);
-  }
-  
   goToPanier(): void {
     this.router.navigate(['/panier']);
   }

@@ -6,8 +6,8 @@ export interface CartItem {
   title: string;
   photo: string;
   price: number;
+  size?: string;
   quantity: number;
-  size?: string; 
 }
 
 @Injectable({
@@ -15,16 +15,30 @@ export interface CartItem {
 })
 export class PanierService {
   private cart: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>(this.cart);
+  private cartSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
 
-  constructor() {}
+  constructor() {
+    this.loadCartFromLocalStorage();
+  }
 
-  getCart(): Observable<CartItem[]> {
-    return this.cartSubject.asObservable();
+  private saveCartToLocalStorage(): void {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  private loadCartFromLocalStorage(): void {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+      this.cartSubject.next(this.cart);
+    }
   }
 
   fetchCart(): void {
     this.cartSubject.next(this.cart);
+  }
+
+  getCart(): Observable<CartItem[]> {
+    return this.cartSubject.asObservable();
   }
 
   addToCart(item: CartItem): void {
@@ -33,34 +47,33 @@ export class PanierService {
     );
 
     if (existingItem) {
-      existingItem.quantity += item.quantity || 1;
+      existingItem.quantity += item.quantity;
     } else {
-      this.cart.push({ ...item, quantity: item.quantity || 1 });
+      this.cart.push(item);
     }
 
-    this.cartSubject.next([...this.cart]);
+    this.saveCartToLocalStorage();
+    this.cartSubject.next(this.cart);
   }
 
   updateQuantity(id: string, size: string, quantity: number): void {
-    const item = this.cart.find(
-      (cartItem) => cartItem.id === id && cartItem.size === size
-    );
-
+    const item = this.cart.find((cartItem) => cartItem.id === id && cartItem.size === size);
     if (item) {
       item.quantity = quantity;
-      this.cartSubject.next([...this.cart]);
+      this.saveCartToLocalStorage();
+      this.cartSubject.next(this.cart);
     }
   }
 
   removeItem(id: string, size: string): void {
-    this.cart = this.cart.filter(
-      (cartItem) => !(cartItem.id === id && cartItem.size === size)
-    );
-    this.cartSubject.next([...this.cart]);
+    this.cart = this.cart.filter((cartItem) => !(cartItem.id === id && cartItem.size === size));
+    this.saveCartToLocalStorage();
+    this.cartSubject.next(this.cart);
   }
 
   clearCart(): void {
     this.cart = [];
-    this.cartSubject.next([...this.cart]);
+    this.saveCartToLocalStorage();
+    this.cartSubject.next(this.cart);
   }
 }

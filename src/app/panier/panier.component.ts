@@ -1,49 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem, PanierService } from '../panier.service';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
+import { CartItem, PanierService } from '../panier.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panier',
-  imports:[FormsModule,NgIf,NgFor],
+  standalone: true,
+  imports: [FormsModule, NgIf, NgFor, MatIconModule], 
   templateUrl: './panier.component.html',
   styleUrls: ['./panier.component.css'],
 })
 export class PanierComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private panierService: PanierService) {}
+  constructor(private panierService: PanierService, private router: Router) {}
+
+  goToCheckout(): void {
+    this.router.navigate(['/checkout']);
+  }
 
   ngOnInit(): void {
     this.panierService.getCart().subscribe((items) => {
       this.cartItems = items.map((item) => ({
         ...item,
-        quantity: item.quantity || 1, 
+        quantity: item.quantity || 1,
       }));
     });
     this.panierService.fetchCart();
   }
 
-
   updateQuantity(item: CartItem): void {
     if (item.quantity && item.quantity > 0) {
       this.panierService.updateQuantity(item.id, item.size || '', item.quantity);
     } else {
-      console.warn('La quantité doit être supérieure à 0');
-      item.quantity = 1; 
+      item.quantity = 1;
     }
   }
-
 
   removeItem(item: CartItem): void {
     this.panierService.removeItem(item.id, item.size || '');
   }
 
-
   clearCart(): void {
     this.panierService.clearCart();
   }
-
 
   getTotal(): number {
     return this.cartItems.reduce(
