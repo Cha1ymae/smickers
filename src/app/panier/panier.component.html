@@ -4,7 +4,7 @@
     <img [src]="item.photo" alt="{{ item.title }}" width="80" />
     <div>
       <h4>{{ item.title }}</h4>
-      <p>Taille : {{ item.size }}</p>
+      <p *ngIf="item.size">Taille : {{ item.size }}</p>
       <label>Quantité :</label>
       <input
         type="number"
@@ -12,7 +12,7 @@
         (change)="updateQuantity(item)"
         min="1"
       />
-      <p>Prix : {{ item.price * item.quantity }} €</p>
+      <p>Prix : {{ item.price * (item.quantity || 1) }} €</p>
     </div>
     <button (click)="removeItem(item)">Supprimer</button>
   </div>
