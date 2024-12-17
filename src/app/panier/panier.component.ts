@@ -65,6 +65,7 @@ export class PanierComponent implements OnInit {
   }
 
   goToCheckout(): void {
-    this.router.navigate(['/checkout'], { state: { total: this.total } });
+    this.panierService.checkStockAndGoToCheckout(); 
+    { state: { total: this.total } }
   }
 }

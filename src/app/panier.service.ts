@@ -71,7 +71,7 @@ export class PanierService {
         this.saveCartToLocalStorage();
         this.cartSubject.next(this.cart);
         alert('Commande validée, les stocks ont été mis à jour.');
-        this.router.navigate(['/checkout']); 
+        this.router.navigate(['/checkout']);
       }
     });
   }
