@@ -1,112 +1,66 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface CartItem {
   id: string;
   title: string;
-  price: number;
-  size?: string;
-  quantity?: number; 
   photo: string;
+  price: number;
+  quantity: number;
+  size?: string; 
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class PanierService {
-  private apiUrl = 'https://enigma-smickers-backend-73e446c36fde.herokuapp.com/api/v1/cart';
-  private cartItems: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
+  private cart: CartItem[] = [];
+  private cartSubject = new BehaviorSubject<CartItem[]>(this.cart);
 
-  constructor(private http: HttpClient) {}
-
-  fetchCart(): void {
-    this.http.get<any>(this.apiUrl).subscribe(
-      (response) => {
-        if (response && response.products) {
-          this.cartItems = response.products.map((product: any) => ({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            photo: product.photo,
-          }));
-          this.cartSubject.next(this.cartItems);
-          console.log('Panier récupéré avec succès', this.cartItems);
-        }
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération du panier', error);
-      }
-    );
-  }
-
- 
-  addToCart(item: CartItem): void {
-    if (!item || !item.id) {
-      console.error('Produit invalide', item);
-      return;
-    }
-  
-    const productPayload = {
-      products: [{ id: item.id }],
-    };
-  
-    this.http.patch<any>(this.apiUrl, productPayload).subscribe({
-      next: (response) => {
-        console.log('Produit ajouté au panier', response);
-        this.fetchCart();
-      },
-      error: (error) => {
-        console.error("Erreur lors de l'ajout au panier", error);
-      },
-    });
-  }
-
-
-  updateQuantity(itemId: string, size: string, quantity: number): void {
-    const payload = { itemId, size, quantity };
-
-    this.http.patch(this.apiUrl, payload).subscribe(
-      () => {
-        console.log('Quantité mise à jour');
-        this.fetchCart();
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour de la quantité', error);
-      }
-    );
-  }
-
-  removeItem(itemId: string, size?: string): void {
-    this.http
-      .delete(`${this.apiUrl}/${itemId}`, { params: size ? { size } : {} })
-      .subscribe(
-        () => {
-          console.log('Produit supprimé du panier');
-          this.fetchCart();
-        },
-        (error) => {
-          console.error('Erreur lors de la suppression du produit', error);
-        }
-      );
-  }
-
-
-  clearCart(): void {
-    this.http.delete(this.apiUrl).subscribe(
-      () => {
-        this.cartItems = [];
-        this.cartSubject.next(this.cartItems);
-        console.log('Panier vidé avec succès');
-      },
-      (error) => {
-        console.error('Erreur lors du vidage du panier', error);
-      }
-    );
-  }
+  constructor() {}
 
   getCart(): Observable<CartItem[]> {
     return this.cartSubject.asObservable();
+  }
+
+  fetchCart(): void {
+    this.cartSubject.next(this.cart);
+  }
+
+  addToCart(item: CartItem): void {
+    const existingItem = this.cart.find(
+      (cartItem) => cartItem.id === item.id && cartItem.size === item.size
+    );
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity || 1;
+    } else {
+      this.cart.push({ ...item, quantity: item.quantity || 1 });
+    }
+
+    this.cartSubject.next([...this.cart]);
+  }
+
+  updateQuantity(id: string, size: string, quantity: number): void {
+    const item = this.cart.find(
+      (cartItem) => cartItem.id === id && cartItem.size === size
+    );
+
+    if (item) {
+      item.quantity = quantity;
+      this.cartSubject.next([...this.cart]);
+    }
+  }
+
+  removeItem(id: string, size: string): void {
+    this.cart = this.cart.filter(
+      (cartItem) => !(cartItem.id === id && cartItem.size === size)
+    );
+    this.cartSubject.next([...this.cart]);
+  }
+
+  clearCart(): void {
+    this.cart = [];
+    this.cartSubject.next([...this.cart]);
   }
 }
