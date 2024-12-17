@@ -35,7 +35,7 @@ export class PanierService {
     }
   }
 
-  checkStockAndGoToCheckout(): void {
+  checkStockAndGoToCheckout(): Boolean {
     this.productService.getAllProducts().subscribe((productsData) => {
       const products = productsData.data;
         let stockAvailable = true;
@@ -71,9 +71,11 @@ export class PanierService {
         this.saveCartToLocalStorage();
         this.cartSubject.next(this.cart);
         alert('Commande validée, les stocks ont été mis à jour.');
-        this.router.navigate(['/checkout']);
       }
+      return true        
+
     });
+    return false;
   }
 
 
