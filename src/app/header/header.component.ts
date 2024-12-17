@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MyProductService } from '../my-product.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
+import { Product } from '../product/product.types';
 
 @Component({
   standalone: true,
@@ -20,13 +22,25 @@ import { Router, RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    RouterModule, // Importé pour routerLink
-  ],
+    RouterModule,
+    NgIf,
+    NgFor,
+],
 })
 export class HeaderComponent {
   searchQuery: string = '';
+  searchResults: Product[] = [];
 
-  constructor(private productService: MyProductService, private router: Router) {}
+  constructor(private productService: MyProductService, private router: Router) {
+    this.productService.loadAllProducts().subscribe({
+      next: (data) => {
+        console.log('Produits chargés', data);
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des produits', err);
+      }
+    });
+  }
 
   scrollTo(sectionId: string): void {
     const targetSection = document.getElementById(sectionId);
@@ -34,14 +48,26 @@ export class HeaderComponent {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
   handleSearch(): void {
     const query = this.searchQuery.trim().toLowerCase();
     if (!query) {
       console.log('Veuillez saisir un terme de recherche.');
       return;
     }
-    console.log('Recherche en cours pour:', query);
+
+    this.productService.searchProducts(query).subscribe({
+      next: (results) => {
+        this.searchResults = results; 
+        if (results.length === 0) {
+          console.log('Aucun produit trouvé.');
+        } else {
+          console.log('Résultats de la recherche:', this.searchResults);
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la recherche:', err);
+      },
+    });
   }
 
   navigateToCategory(category: string): void {

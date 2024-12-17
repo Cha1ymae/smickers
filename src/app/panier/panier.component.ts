@@ -20,7 +20,6 @@ export class PanierComponent implements OnInit {
   goToCheckout(): void {
     const total = this.getTotal();
     this.router.navigate(['/checkout'], { state: { total } });
-  }
 
   ngOnInit(): void {
     this.panierService.getCart().subscribe((items) => {

@@ -58,13 +58,18 @@ export class ProductComponent {
 
   onAddToCart() {
     if (this.product?.stock && this.product?.stock > 0) {
+      if (this.quantity > this.product.stock) {
+        alert("Quantité demandée supérieure au stock disponible !");
+        return;  
+      }
+  
       if (!this.product) {
         console.error('Produit non défini');
         return;
       }
   
       this.product.stock -= this.quantity;
-      console.log(`Stock restant : ${this.product?.stock}`);
+      console.log(`Stock restant après ajout au panier : ${this.product?.stock}`);
   
       const cartItem: CartItem = {
         id: this.product.id,
@@ -84,11 +89,12 @@ export class ProductComponent {
   
       setTimeout(() => {
         this.addedToCart = false;
-      }, 5000);
+      }, 1000);
     } else {
-      console.log('Stock épuisé, impossible d\'ajouter au panier');
+      alert('Stock épuisé, impossible d\'ajouter ce produit au panier');
     }
   }
+  
 
   get productImage(): string {
     return this.product?.photo?.trim()
