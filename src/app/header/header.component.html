@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
   <div class="logo">
-    <span class="brand">Smickers</span>
+    <a mat-button routerLink="/" class="brand">Smickers</a>
   </div>
 
   <div class="navigation">
@@ -11,8 +11,12 @@
     </nav>
 
     <mat-form-field class="search-field" appearance="outline">
-      <input matInput placeholder="Rechercher une marque, un modèle..." 
-        [(ngModel)]="searchQuery" (keydown.enter)="handleSearch()"/>
+      <input
+        matInput
+        placeholder="Rechercher une marque, un modèle..."
+        [(ngModel)]="searchQuery"
+        (keydown.enter)="handleSearch()"
+      />
       <button mat-icon-button matSuffix (click)="handleSearch()">
         <mat-icon>search</mat-icon>
       </button>
@@ -25,6 +29,7 @@
     </button>
   </div>
 </mat-toolbar>
+
 <div *ngIf="searchResults.length > 0" class="search-results-container">
   <h3 class="search-results-title">Résultats de recherche</h3>
   <ul class="search-results-list">
