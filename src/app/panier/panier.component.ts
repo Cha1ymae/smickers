@@ -18,7 +18,7 @@ export class PanierComponent implements OnInit {
   constructor(private panierService: PanierService, private router: Router) {}
 
   goToCheckout(): void {
-    this.router.navigate(['/checkout']);
+    this.panierService.checkStockAndGoToCheckout(); 
   }
 
   ngOnInit(): void {

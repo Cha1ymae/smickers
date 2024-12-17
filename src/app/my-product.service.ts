@@ -52,6 +52,12 @@ export class MyProductService {
     console.log(filteredProducts);
     return of(filteredProducts);
   }
+
+  updateProductStock(productId: string, newStock: number): Observable<Product> {
+    return this.http.patch<Product>(`${this.apiUrl}/api/v1/products/${productId}`, {
+      stock: newStock,
+    });
+  }
   
   loadAllProducts(): Observable<ProductsData> {
     return this.http.get<ProductsData>(`${this.apiUrl}/api/v1/products`).pipe(

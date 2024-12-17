@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MyProductService } from './my-product.service';
+import { Router } from '@angular/router';
 
 export interface CartItem {
   id: string;
@@ -17,7 +19,7 @@ export class PanierService {
   private cart: CartItem[] = [];
   private cartSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
 
-  constructor() {
+  constructor(private productService: MyProductService,    private router: Router,     ) {
     this.loadCartFromLocalStorage();
   }
 
@@ -33,9 +35,53 @@ export class PanierService {
     }
   }
 
+  checkStockAndGoToCheckout(): void {
+    this.productService.getAllProducts().subscribe((productsData) => {
+      const products = productsData.data;
+        let stockAvailable = true;
+      
+      for (let cartItem of this.cart) {
+        const product = products.find((p) => p.id === cartItem.id);
+
+        if (product && cartItem.quantity > product.stock) {
+         stockAvailable = false;
+          alert(`La quantité demandée pour le produit "${product.title}" dépasse le stock disponible.`);
+          break; 
+        }
+      }
+
+      if (stockAvailable) {
+        this.cart.forEach((cartItem) => {
+          const product = products.find((p) => p.id === cartItem.id);
+          console.log(`Stock du produit "${product?.title}":"${product?.stock}"`);
+          if (product) {
+            product.stock -= cartItem.quantity;
+  
+            this.productService.updateProductStock(product.id, product.stock).subscribe({
+              next: () => {
+                console.log(`Stock du produit "${product.title}":"${product.stock}"`);
+              },
+              error: (err) => {
+                console.error('Erreur lors de la mise à jour du stock :', err);
+              },
+            });
+          }
+        });
+        this.clearCart();
+        this.saveCartToLocalStorage();
+        this.cartSubject.next(this.cart);
+        alert('Commande validée, les stocks ont été mis à jour.');
+        this.router.navigate(['/checkout']); 
+      }
+    });
+  }
+
+
   fetchCart(): void {
     this.cartSubject.next(this.cart);
   }
+
+ 
 
   getCart(): Observable<CartItem[]> {
     return this.cartSubject.asObservable();
