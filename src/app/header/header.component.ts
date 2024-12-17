@@ -48,6 +48,9 @@ export class HeaderComponent {
     this.router.navigate(['/category', category]);
   }
 
+  navigateToProducts(products: string): void {
+    this.router.navigate(['/', products]);
+  }
   goToPanier(): void {
     this.router.navigate(['/panier']);
   }
