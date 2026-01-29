@@ -1,0 +1,32 @@
+<div class="newsletter-section">
+  <div class="newsletter-container">
+    <h2>Joignez notre newsletter</h2>
+    <p>Recevez les nouvelles, les promotions et tout ce qui nous concerne!</p>
+    <form #newsForm="ngForm" class="newsletter-form" (ngSubmit)="submitForm(newsForm.value)">
+      <div class="input-wrapper">
+        <input
+          name="email"
+          ngModel
+          #emailModel="ngModel"
+          type="email"
+          placeholder="Entrez votre email"
+          class="newsletter-input"
+          required
+          email
+          [class.invalid]="emailModel.invalid && emailModel.touched"
+        />
+        <div *ngIf="emailModel.invalid && emailModel.touched" class="error-message">
+          Veuillez entrer une adresse email valide.
+        </div>
+      </div>
+      <button [disabled]="!newsForm.valid" type="submit" class="newsletter-button">S'abonner</button>
+    </form>
+
+    <div *ngIf="showCoupon" class="coupon-message">
+      <p>
+        Merci pour votre inscription ! Utilisez le code
+        <strong>{{ couponCode }}</strong> pour bénéficier de <strong>10% de réduction</strong>.
+      </p>
+    </div>
+  </div>
+</div>

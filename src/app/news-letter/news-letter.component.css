@@ -1,0 +1,76 @@
+.newsletter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #f9f9f9;
+}
+
+.newsletter-container {
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.input-wrapper {
+  margin-bottom: 15px;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.newsletter-input.invalid {
+  border-color: #ff4d4d;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.newsletter-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.newsletter-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.coupon-message {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
+}
