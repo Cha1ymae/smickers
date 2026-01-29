@@ -24,4 +24,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/tpdocker:latest
+          tags: cha1ymae/tpdocker:latest
